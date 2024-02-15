@@ -10,8 +10,8 @@
 
 
 
-## Getting started
-### Prerequisites
+## Getting started 🚀
+### Prerequisites 📋
 To run the basic first you need to install the following software tools:
 
 -  Python >= 3.8  (https://www.python.org/downloads/)
@@ -22,7 +22,7 @@ To run the basic first you need to install the following software tools:
     ```
 
 
-### Introduction
+### Introduction (Coming soon) ❗
 
 ## Contributing
 
