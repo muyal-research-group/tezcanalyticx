@@ -48,7 +48,7 @@ python ./basic_workload.py
 ## Popularity model
 
 ### Frecuency
-$$feq_{i}(t)=\frac{access_{i}(t)}{total\_access(t)}$$
+$$feq_{i}(t)=\frac{access_{i}(t)}{totalAccess(t)}$$
 ### Popularity
 $$p_{i}(t+1)=p_{i}(t)+\theta\times feq_{i}(t)$$
 
