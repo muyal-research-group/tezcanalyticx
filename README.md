@@ -46,11 +46,16 @@ python ./basic_workload.py
 ```
 
 ## Popularity model
-$feq_{i}(t)=\frac{\#access_{i}(t)}{\#total\_access(t)}$
 
-$p_{i}(t+1)=p_{i}(t)+\theta\times feq_{i}(t)$
+### Frecuency
+$$feq_{i}(t)=\frac{\#access_{i}(t)}{\#total\_access(t)}$$
+### Popularity
+$$p_{i}(t+1)=p_{i}(t)+\theta\times feq_{i}(t)$$
 
-$p_{i}(\Delta) \geq p_{th}$
+$$p_{i}(\Delta) \geq p_{th}$$
+
+### Data lifetime (coming soon) ❗
+### Request distribution over time (coming soon) ❗
 
 ## Contributing
 
