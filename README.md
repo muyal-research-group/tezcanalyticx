@@ -22,7 +22,35 @@ To run the basic first you need to install the following software tools:
     ```
 
 
-### Introduction (Coming soon) ❗
+### Introduction 
+<!-- This is the analyzer server that receive from $n$ clients a batch of events of size $m$.  -->
+The produiction and consumption pattern analyzer for serverless storage systrem is a sophisticated system software designed to predictive insights and actionable recommendatiosn to iomprove storage utilziation, performances and availability. 
+<p align="center">
+  <img width="350" src="./images/basics.png" />
+</p>
+
+### Deployment
+
+First you need to run the server using the following comand:
+```sh
+ uvicorn server:app --reload --port 45000
+```
+
+this command run a server on port ```45000```. ⚠️You can change the port but this implies a update in the logger handler.
+
+### Testing
+
+To send a workload events to the analyzer you need to run the following script located at  ```tests/``` at the same level there is a ```workload1.csv``` that contains a simple workload you can generate your own workloads or download a workload with 10k events [link](https://alpha.tamps.cinvestav.mx/v0/mictlanx/peer0/api/v4/buckets/mictlanx/72d28f66c6c0905b8e3fa78ee7adda796113d4df8c5dec5d1b67f3f585c7fc8d):
+```bash
+python ./basic_workload.py
+```
+
+## Popularity model
+$feq_{i}(t)=\frac{\#access_{i}(t)}{\#total\_access(t)}$
+
+$p_{i}(t+1)=p_{i}(t)+\theta\times feq_{i}(t)$
+
+$p_{i}(\Delta) \geq p_{th}$
 
 ## Contributing
 
