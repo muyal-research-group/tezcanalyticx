@@ -5,7 +5,7 @@
 <a href="https://test.pypi.org/project/mictlanx/"><img src="https://img.shields.io/badge/build-0.0.1-2ea44f?logo=Logo&logoColor=%23000" alt="build - 0.0.1"></a>
 </div>
 <div align=center>
-        <h2>TezcanalyticX: <span style="font-weight:normal;"> Production and consumption pattern analyzer for high available serverless computing</span></h2>
+        <h2>TezcanalyticX: <span style="font-weight:normal;"> Production and consumption pattern analyzer for high availability storage systems</span></h2>
 </div>
 
 
