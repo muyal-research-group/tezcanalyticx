@@ -24,7 +24,7 @@ To run the basic first you need to install the following software tools:
 
 ### Introduction 
 <!-- This is the analyzer server that receive from $n$ clients a batch of events of size $m$.  -->
-The produiction and consumption pattern analyzer for serverless storage systrem is a sophisticated system software designed to predictive insights and actionable recommendatiosn to iomprove storage utilziation, performances and availability. 
+The production and consumption pattern analyzer for serverless storage systrem is a sophisticated system software designed to predictive insights and actionable recommendatiosn to iomprove storage utilziation, performances and availability. 
 <p align="center">
   <img width="350" src="./images/basics.png" />
 </p>
