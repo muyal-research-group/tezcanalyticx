@@ -31,7 +31,7 @@ The production and consumption pattern analyzer for serverless storage systrem i
 
 ### Deployment
 
-First you need to run the server using the following comand:
+First you need to run the server using the following comand, you must be in ```src/``` folder:
 ```sh
  uvicorn server:app --reload --port 45000
 ```
