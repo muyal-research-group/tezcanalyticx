@@ -6,6 +6,7 @@ import humanfriendly as HF
 from fastapi import FastAPI,Response,Request
 from mictlanx.logger.log import Log
 import uvicorn
+import json as J
 
 app = FastAPI()
 class Event(object):
@@ -20,8 +21,13 @@ This route is call by the clients that emits a batch of N events. You should pro
 """
 @app.post("/api/v4/events")
 async def add_event(request:Request):
-    events = await request.json()
-    print("Event",events)
+    events = J.loads(await request.json())
+    # print(type(events))
+    for event in events:
+        print(event)
+        
+        print("_"*20)
+    # print("Event",events)
     return Response(content=None, status_code=204)
 
 
