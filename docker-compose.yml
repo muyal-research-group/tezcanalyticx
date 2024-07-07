@@ -1,0 +1,50 @@
+services:
+    tezcanalyticx-0:
+        image: nachocode/tezcanalyticx:api
+        container_name:  tezcanalyticx-0
+        environment:
+            - TEZCANALYTICX_ENABLED=0
+            - TEZCANALYTICX_FLUSH_TIMEOUT=10s
+            - TEZCANALYTICX_BUFFER_SIZE=100
+            - TEZCANALYTICX_PATH=/api/v4/events/
+            - TEZCANALYTICX_PORT=${TEZCANALYTICX_PORT-45000}
+            - TEZCANALYTICX_HOSTNAME=localhost
+            - TEZCANALYTICX_LEVEL=0
+            - TEZCANALYTICX_PROTOCOL=http
+            - LOG_PATH=/log
+            - MICTLANX_ROUTER_LOG_NAME=mictlanx-router-0
+            - MICTLANX_ROUTER_LOG_INTERVAL=24
+            - MICTLANX_ROUTER_LOG_WHEN=h
+            - MICTLANX_ROUTER_LOG_SHOW=1
+            - MICTLANX_ROUTER_REPLICATOR_QUEUE_MAXSIZE=100
+            - MICTLANX_ROUTER_PEER_HEALER_HEARTBEAT=10sec
+            - MICTLANX_ROUTER_REPLICATOR_QUEUE_TIMEOUT=10sec
+            - MICTLANX_ROUTER_SYNC_FAST=1
+            - MICTLANX_ROUTER_LB_ALGORITHM=ROUND_ROBIN
+            - MICTLANX_ROUTER_PEER_BASE_PORT=25000
+            - MICTLANX_ROUTER_MAX_PEERS=10
+            - MICTLANX_ROUTER_MAX_TTL=3
+            - MICTLANX_ROUTER_AVAILABLE_NODES=0;1;2;3;4;5;6;7;8;9;10
+            - MICTLANX_ROUTER_MAX_AFTER_ELASTICITY=10
+            - MICTLANX_ROUTER_SHOW_PEER_HEALER_LOGS=0
+            - MICTLANX_ROUTER_SHOW_REPLICATOR_LOGS=1
+            - MICTLANX_ROUTER_DELAY=2s
+            - MICTLANX_ROUTER_MAX_TRIES=60
+            - MICTLANX_PEERS_STR=mictlanx-peer-0:localhost:25000 mictlanx-peer-1:localhost:25001 mictlanx-peer-2:localhost:25002
+            - MICTLANX_PROTOCOL=http
+            - MICTLANX_API_VERSION=4
+            - MICTLANX_TIMEOUT=3600        
+        command: uvicorn tezcanalyticx.server:app --host ${TEZCANALYTICX_IP_ADDR-0.0.0.0} --port ${TEZCANALYTICX_PORT-45000}
+        ports:
+        - ${TEZCANALYTICX_PORT-45000}:${TEZCANALYTICX_PORT-45000}
+        volumes:
+        - tezcanalyticx-0:/log
+        networks:
+        - mictlanx
+        restart: unless-stopped
+volumes:
+    tezcanalyticx-0:
+networks:
+    mictlanx:
+       external: true
+   
