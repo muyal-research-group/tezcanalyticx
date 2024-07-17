@@ -1,9 +1,11 @@
 import os
 import time as T
+import aiorwlock 
 import asyncio
 import humanfriendly as HF
 from enum import Enum
 from pydantic import BaseModel
+from nanoid import generate as nanoid
 from fastapi import FastAPI,Response,Request,HTTPException
 from fastapi.openapi.utils import get_openapi
 from fastapi.responses import JSONResponse
@@ -11,10 +13,10 @@ from fastapi.encoders import jsonable_encoder
 from mictlanx.logger.log import Log
 from asyncio.locks import Lock
 from typing import Dict,List,Any
-import uvicorn
 import json as J
 import numpy as np
 import numpy.typing as npt
+from tezcanalyticx.events import EventManager,Period,EventX
 from tezcanalyticx.interfaces.index import Counter,ObjectTimeStore
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -604,11 +606,33 @@ async def plot_dist(column:str,max_periods=10):
 
 
 
+
+
+@app.post("/api/v4/events")
+async def process_events(request:Request):
+    
+    events            = J.loads(await request.json())
+    current_period    = await event_manager.get_current_period()
+    eventsx = list(map(lambda e : EventX.from_json(e), events))
+    log.debug({
+        "event":"ADD.EVENTS",
+        "events":len(eventsx)
+    })
+    await current_period.add_events(events= eventsx)
+    return Response(
+        content= None,
+        status_code=204
+    )
+    # print(eventsx)
+    # print("CURRENT_PERIODS", current_period)
+
+
+    
 """
 This route is call by the clients that emits a batch of N events. You should process them and store the batch for further analysis...
 """
-@app.post("/api/v4/events")
-async def process_events(request:Request):
+@app.post("/api/v4/x/events")
+async def x_process_events(request:Request):
     events            = J.loads(await request.json())
     last_arrival_time =  None
     global INTERARRIVAL_TIMES
@@ -721,6 +745,22 @@ async def process_events(request:Request):
     # print("Event",events)
     return Response(content=None, status_code=204)
 
+
+
+event_manager = EventManager()
+@app.get("/x/events")
+async def get_periods():
+    xs = await event_manager.get_periods_dict()
+    return JSONResponse(
+        content= jsonable_encoder(xs)
+    )
+
+@app.get("/x/events/stats")
+async def get_periods_stats():
+    xs = await event_manager.stats()
+    return JSONResponse(
+        content= jsonable_encoder(xs)
+    )
 
 # if __name__ == "__main__":
 #     uvicorn.run(
